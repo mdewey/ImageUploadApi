@@ -28,6 +28,9 @@ export class Home extends Component {
          },
       }).then(response => {
         console.log({response});
+        this.setState({
+          lastUploadedUrl: response.data.secure_url
+        })
       })
     });
   
@@ -59,7 +62,9 @@ export class Home extends Component {
             )
           }}
         </Dropzone>
-
+      <div>
+          <img src={this.state.lastUploadedUrl}/>
+      </div>
       </div>
     );
   }

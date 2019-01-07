@@ -25,9 +25,12 @@ namespace content.Controllers
         /// <param name="file"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> UploadImage(IFormFile file)
+        public async Task<ActionResult> UploadImage(IFormFile file)
         {
-            return await _imageHandler.UploadImage(file);
+            var path =  await _imageHandler.UploadImage(file);
+            var rv = new content.Helpers.CloudinaryStorage().UploadFile(path);
+            // TODO: add to database
+            return Ok(rv);
         }
 
 
