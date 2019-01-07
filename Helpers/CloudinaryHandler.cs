@@ -4,17 +4,17 @@ using CloudinaryDotNet.Actions;
 
 namespace content.Helpers
 {
-    class CloudinaryStorage
+    public class CloudinaryStorage
     {
 
         private Cloudinary _cloudinary;
-        public CloudinaryStorage()
+        public CloudinaryStorage(CloudinaryKeys creds)
         {
 #warning TODO: remove from source control
             Account account = new Account(
-                  "cloud id",
-                  "something",
-                  "something else");
+                  creds.CloudName,
+                 creds.CloudKey,
+                  creds.CloudSecret);
 
             _cloudinary = new Cloudinary(account);
 
@@ -29,5 +29,12 @@ namespace content.Helpers
             var uploadResult = _cloudinary.Upload(uploadParams);
             return uploadResult;
         }
+    }
+
+    public class CloudinaryKeys
+    {
+        public string CloudName { get; set; }
+        public string CloudKey { get; set; }
+        public string CloudSecret { get; set; }
     }
 }
